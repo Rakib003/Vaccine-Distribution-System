@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="bootstrap\css\style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <title>Tourist Support in Bangladesh</title>
+    <title>Vaccine Distribution</title>
 </head>
 
 <body>

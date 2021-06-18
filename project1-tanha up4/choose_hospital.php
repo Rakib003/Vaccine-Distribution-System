@@ -65,15 +65,17 @@
 
                       if($option=='Show history'){
 
-                        $query = "select Disease_Name,Vaccine_Name,Vaccine_cost,Hospital_Name 
+                        $query = "select Disease_Name,Vaccine_Name,Vaccination_date,Vaccine_cost,Hospital_Name 
                         from Vaccine V inner join People_Hospital_Vaccine PHV on V.Vaccine_id=PHV.Vaccine_id inner join Hospital H on PHV.Hospital_ID=H.Hospital_ID
                         where User_NID='".$user."'";
                     
-                        $nn = "Your NID : ";
+                        $nn = "<h2>Your NID : ";
                         echo $nn;
                         echo $user;
+                        echo "</h2>";
 
                         CreateTable_av($query, $conn);
+
                        // echo $query;
 
 

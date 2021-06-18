@@ -56,50 +56,40 @@
                 <div class="col">
                 <?php 
                     include_once 'database.php';
+                    include_once 'function.php';
+
                     $conn = oci_connect("project1","project1", "localhost/XE");
                     if (!$conn) {
                     	$e = oci_error();
                     	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
                     }
 
-                    include_once 'function.php';
-                            if(isset($_POST['submit'])){
-                            $user = $_POST['useremail'];
-                            $pass = $_POST['password'];
-                                    
-                            if($user=="mist@ac.bd" and $pass=="mist"){     
-                                echo "successfully logged in";
-                                
-                                echo '<section class="body3">
-                                <div class="container3">
-                                    <form action="adminAddData.php" method="post">
-        
-                                    <div class="hello">
-                                            <label><h1>What do You Want?</h1></label>
-                                            <h3>
-                                            <select name="option">
-                                                <option value="" hidden>Select option</option>
-                                                <option value="add">Add New Hospital or Vaccine Distributor</option>
-                                                <option value="sendHospital">Distribute Vaccine to Hospital</option>
-                                                <option value="search vaccine">Search for vaccine or users</option>
-                                            </select>
-                                            </h3>
-                                            
-                                        </div>
-                                        
-                                        <h2><input type="submit" name="submit" value="submit" class="btn-login"/></h2>
-                                    </form>
-                                </div>
-                                </section>';
-
-                            }
-                            else{
-                                echo "wrong password or username";
-                            }
-
-                            }
-
+                    if(isset($_POST['save'])){
+                      $user = $_POST['name'];
+                  
+                      $s = oci_parse($conn, "select Vaccine_Name from vaccine where vaccine_name='$user'");       
+                      oci_execute($s);
+                      $row = oci_fetch_array($s, OCI_ASSOC);
                     
+                      if($row){   
+                        
+                        
+
+                        $query = "select unique p.User_NID, p.username,Vaccination_date,Disease_Name,h.hospital_name from  people p inner join  people_hospital_vaccine pv on  pv.user_nid=p.user_nid inner join vaccine v on v.vaccine_id=pv.vaccine_id inner join hospital_vaccine hv on hv.vaccine_id=v.vaccine_id inner join Hospital h on hv.hospital_id=h.hospital_id  where v.vaccine_name='".$user."'";
+                       
+                  
+                       echo '<h1>Userlist who took this vaccine</h1>';
+                       
+                        
+                        
+
+                        CreateTable_av($query, $conn);
+                      
+
+                      }else{
+                          echo "Invalid vaccine name ";
+                      }
+                    }
                 ?>
                 </div>
             </div>

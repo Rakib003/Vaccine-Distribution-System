@@ -11,13 +11,13 @@
             trigger_error('Could not execute statement: '. $m['message'], E_USER_ERROR);
         }
         // creating table
-        echo "<table class=\"table table-hover table-bordered\">";
+        echo "<table class=\"bb table table-hover table-bordered\">";
         $ncols = oci_num_fields($s);
         echo "<thead>";
         echo "<tr>\n";
         for ($i = 1; $i <= $ncols; ++$i) {
             $colname = oci_field_name($s, $i);
-            echo "  <th scope=\"col\">".htmlspecialchars($colname,ENT_QUOTES|ENT_SUBSTITUTE)."</th>\n";
+            echo "  <th scope=\"col\"><h4>".htmlspecialchars($colname,ENT_QUOTES|ENT_SUBSTITUTE)."</h4></th>\n";
         }
 
         // if($action == 1){ // checking if we need Action column or not
@@ -30,9 +30,9 @@
         while (($row = oci_fetch_array($s, OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
             echo "<tr>\n";
             foreach ($row as $item) {
-                echo "<td>";
+                echo "<td> <h4>";
                 echo $item!==null?htmlspecialchars($item, ENT_QUOTES|ENT_SUBSTITUTE):"&nbsp;";
-                echo "</td>\n";
+                echo "</h4></td>\n";
             }
             // if($action == 1){ // adding button in action column
             //     echo "<td>";

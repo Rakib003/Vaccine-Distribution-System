@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" a href="bootstrap/css/css3.css">
     <link rel="stylesheet" href="bootstrap\css\font-awesome-5.8.1.css">
     <link rel="stylesheet" href="bootstrap\css\bootstrap.css">
     <link rel="stylesheet" href="bootstrap\css\mdb.css">
@@ -16,9 +17,10 @@
 </head>
 
 <body>
-   <!-- Nav bar-->
 
-   <nav class="navbar navbar-expand-sm navbar-dark bg-teal fixed-top">
+    <!-- Nav bar-->
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-teal fixed-top">
         <div class="container">
             <a href="index.html" class="navbar-brand">
                 <i class="fa fa-plane-departure"></i> Vaccine Distribution</a>
@@ -38,73 +40,83 @@
                         <a href="registration.html" class="nav-link">
                             <h4>Registration</h4>
                         </a>
-
-                        <li class="nav-item px-3">
-                        <a href="login.html" class="nav-link">
-                            <h4>login</h4>
-                        </a>
                     </li>
+                    <li class="nav-item px-3">
+                        <ul><button class="menu-btn"><h3 style="display:ruby-base-container;">Login</h3></button>
+                            <li style="text-align: left;" ><a href="login.html"> <h5 >User</h5></a></li>
+                            <li style="text-align: left;"><a  href="admin.html"><h5>Admin</h5></a></li>
+                        </ul>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
     </nav>
 
- <!-- Main Footer -->
- <footer class="p-3 mt-3 bg-teal text-white text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                <?php 
+    <!-- Login Area -->
+    <?php
                     include_once 'database.php';
-                    $conn = oci_connect("project1","project1", "localhost/XE");
-                    if (!$conn) {
-                    	$e = oci_error();
-                    	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-                    }
-
                     include_once 'function.php';
-                            if(isset($_POST['submit'])){
-                            $user = $_POST['useremail'];
-                            $pass = $_POST['password'];
-                                    
-                            if($user=="mist@ac.bd" and $pass=="mist"){     
-                                echo "successfully logged in";
-                                
-                                echo '<section class="body3">
-                                <div class="container3">
-                                    <form action="adminAddData.php" method="post">
-        
-                                    <div class="hello">
-                                            <label><h1>What do You Want?</h1></label>
-                                            <h3>
-                                            <select name="option">
-                                                <option value="" hidden>Select option</option>
-                                                <option value="add">Add New Hospital or Vaccine Distributor</option>
-                                                <option value="sendHospital">Distribute Vaccine to Hospital</option>
-                                                <option value="search vaccine">Search for vaccine or users</option>
-                                            </select>
-                                            </h3>
-                                            
-                                        </div>
-                                        
-                                        <h2><input type="submit" name="submit" value="submit" class="btn-login"/></h2>
-                                    </form>
-                                </div>
-                                </section>';
-
-                            }
-                            else{
-                                echo "wrong password or username";
-                            }
-
-                            }
-
                     
+                    
+
+                    if(isset($_POST['submit'])){
+                      $gender=$_POST['option'];
+                      
+                      if($gender=='add')
+                      {
+                        $query = "select User_NID from people";
+
+                                echo '<section class="body">
+                                <div class="container3">
+                                <form action="search_NID.php" method="post">
+                                <label><h1>Give NID</h1></label>
+                                    <div>
+                                            <h3>
+                                            <select name="id">
+                                            <option value="" hidden>Select NID</option>';
+                                my_func($query,$conn);
+                                echo '</select>
+                            </h3>
+                        </div>
+
+                            
+                    <h1><input type="submit" name="save" value="submit" class="btn-login"/></h1>
+                        </div>
+                    </form>
+                    </div>
+                    </section>';
+                      }
+                      if($gender=='sendHospital'){
+
+                        $query = "select vaccine_name from vaccine";
+
+                                echo '<section class="body">
+                                <div class="container3">
+                                    <form action="vaccine_by_name.php" method="post">
+                                   <div>
+                                            <label><h1>Vaccine Name</h1></label>
+                                            <h3>
+                                            <select name="name">
+                                            <option value="" hidden>Select option</option>';
+                                my_func($query,$conn);
+                                echo '</select>
+                            </h3>
+                        </div>
+
+                            
+                    <h1><input type="submit" name="save" value="submit" class="btn-login"/></h1>
+                        </div>
+                    </form>
+                    </div>
+                    </section>';
+                        
+                      
+                      }
+                      
+                }
                 ?>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 
     <!-- Contact Section -->
     <section id="contact" class="p-3">

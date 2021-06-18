@@ -88,12 +88,6 @@
                 
                                             <div class="row mt-4 form-group">
                                                 <div class="col-12">
-                                                    <label>ID :</label>
-                                                    <input type="text" placeholder="ID" name="id">
-                                                </div>
-                                            </div>
-                                            <div class="row mt-4 form-group">
-                                                <div class="col-12">
                                                     <label>Name :</label>
                                                     <input type="text" placeholder="Name" name="name">
                                                 </div>
@@ -130,7 +124,7 @@
                         </div>
                     </section>';
                       }
-                      else{
+                      if($gender=='sendHospital'){
                         $query1 = "select Hospital_Name from hospital";
                         echo '<section>
                         <div class="container3">
@@ -173,10 +167,34 @@
             </div>
             </section>';
                       }
-                    
+                      if($gender=='search vaccine'){ 
+                           
+                        echo '<section class="body">
+                        <div class="container3">
+                            <form action="search.php" method="post">
+
+                            <div class="hello">
+                                    <label><h1>What do You Want?</h1></label>
+                                    <h3>
+                                    <select name="option">
+                                        <option value="" hidden>Select option</option>
+                                        <option value="add">search users</option>
+                                        <option value="sendHospital">search by vaccine</option>
+                                       
+                                    </select>
+                                    </h3>
+                                    
+                                </div>
+                                
+                                <h2><input type="submit" name="submit" value="submit" class="btn-login"/></h2>
+                            </form>
+                        </div>
+                        </section>';
+                      
 
                       
                     }
+                }
                 ?>
 
 

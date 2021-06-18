@@ -61,7 +61,6 @@
                     
 
                     if(isset($_POST['save'])){
-                      $id= $_POST['id'];
                       $name=$_POST['name'];
                       $phone=$_POST['phone'];
                       $email= $_POST['email'];
@@ -70,7 +69,7 @@
                       
                       //echo $gender;
 
-                    if($id==null or $name==null or $phone==null or $email==null or $location==null)
+                    if($name==null or $phone==null or $email==null or $location==null)
                     {
                         echo '<h1>Please fill all the fields</h4>';
                     }
@@ -80,7 +79,7 @@
                         echo '<h1>Successfully Added</h1>';
 
                         $ss = "insert into Hospital 
-                        values('".$id."','".$name."','".$location."','".$phone."','".$email."')";
+                        values('H000000000'||hospital_id_sq.nextval,'".$name."','".$location."','".$phone."','".$email."')";
                         $query = oci_parse($conn, $ss);
                         $result = oci_execute($query);
                       }
@@ -89,7 +88,7 @@
                         echo '<h1>Successfully Added</h1>';
 
                         $ss = "insert into Local_Vaccine_Producer 
-                        values('".$id."','".$name."','".$phone."','".$location."','".$email."')";
+                        values('LVP0000000'||local_id_sq.nextval,'".$name."','".$phone."','".$location."','".$email."')";
                         $query = oci_parse($conn, $ss);
                         $result = oci_execute($query);
                       }
@@ -98,7 +97,7 @@
                         echo '<h1>Successfully Added</h1>';
 
                         $ss = "insert into Foreign_Vaccine_Distributor 
-                        values('".$id."','".$name."','".$location."','".$phone."','".$email."')";
+                        values('FVP0000000'||foreign_id_sq.nextval,'".$name."','".$location."','".$phone."','".$email."')";
                         $query = oci_parse($conn, $ss);
                         $result = oci_execute($query);
 

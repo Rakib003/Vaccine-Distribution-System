@@ -63,7 +63,7 @@
                       $user=$_POST['text'];
                       $hospital_name=$_POST['hospital'];
 
-                      $s = "insert into People_Hospital_Vaccine values('". $user . "',(select hospital_id from hospital where Hospital_name='" . $hospital_name . "'),(select vaccine_id from vaccine where vaccine_name='" . $vaccine_name ."'),12,3,'paid')";      
+                      $s = "insert into People_Hospital_Vaccine values('". $user . "',(select hospital_id from hospital where Hospital_name='" . $hospital_name . "'),(select vaccine_id from vaccine where vaccine_name='" . $vaccine_name ."'),to_char(sysdate ,'DD-MON-YYYY'),3,'paid')";      
                       $query = oci_parse($conn, $s);
                       $result = oci_execute($query);
                       if ($result) {

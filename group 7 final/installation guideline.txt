@@ -1,4 +1,4 @@
----->First downloaded and installed Oracle database in our pcs
+---->First downloaded and installed Oracle database in our computers
 
 ---> My PC is - Windows 10 64 bit
 	1)Downloaded XAMPP Version 8.0.6 (x64 bit)
@@ -8,7 +8,7 @@
 	5)After that, I configured php.ini (uncommented the extension -"extension=php_oci8_12c.dll")
 	After doing all of this I was getting some kind of error.
 
----> I solved this problem by:
+---> I solved this problem by    :
 I found that 8.0 Thread Safe (TS) x64 is causing the problem. So I decided to use oci8 x86 bit instead.
 
 	1)For oci8 x86 bit we need XAMPP(xampp-portable-win32-7.3.2-0-VC15-installer.exe) of Windows 32-bit. (https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.3.2/)
